@@ -1,24 +1,26 @@
 language: perl
 sudo: required
 
-perl:
-  - "5.30"
-  - "5.28"
-
 env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
 
-before_script:
-  - sudo mysql -e "SET Password=PASSWORD('travis')"
-  - sudo mysql -e 'create database msa_test;'
-
-jobs:
+matrix:
   include:
-    - perl:
-      - "5.20"
-      - "5.18"
+    - language: perl
+      perl:
+        - "5.30"
+        - "5.28"
+      before_script:
+        - sudo mysql -e "SET Password=PASSWORD('travis')"
+        - sudo mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root:travis@/mojolicious
+    - language: perl
+      perl:
+        - "5.20"
+        - "5.18"
       dist: trusty
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
