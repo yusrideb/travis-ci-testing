@@ -1,24 +1,25 @@
-dist: xenial
+language: perl
 sudo: required
+
+perl:
+  - "5.30"
+  - "5.28"
+  env:
+    - TEST_ONLINE=mysql://root:travis@/mojolicious
+  before_script:
+    - sudo mysql -e "SET Password=PASSWORD('travis')"
+    - sudo mysql -e 'create database mojolicious;'
 
 env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
+  matrix:
+    TEST_ONLINE=mysql://root@/mojolicious
 
 matrix:
   include:
-    - language: perl
-      perl:
-        - "5.30"
-        - "5.28"
-      before_script:
-        - sudo mysql -e "SET Password=PASSWORD('travis')"
-        - sudo mysql -e 'create database mojolicious;'
-      env:
-        - TEST_ONLINE=mysql://root:travis@/mojolicious
-    - language: perl
-      perl:
+    - perl:
         - "5.20"
         - "5.18"
       dist: trusty
