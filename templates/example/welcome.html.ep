@@ -7,3 +7,4 @@
   <%= link_to 'click here' => url_for %> to reload the page or
   <%= link_to 'here' => '/index.html' %> to move forward to a static page.
 </p>
+<p><%= $content_msg %></p>
