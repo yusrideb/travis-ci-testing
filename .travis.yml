@@ -4,6 +4,9 @@ sudo: required
 perl:
   - "5.30"
   - "5.28"
+  - "5.26"
+  - "5.24"
+  - "5.22"
 
 before_script:
   - sudo mysql -e "SET Password=PASSWORD('travis')"
@@ -15,14 +18,40 @@ matrix:
       dist: trusty
       before_script:
         - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.18"
       dist: trusty
       before_script:
         - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
+    - perl: "5.16"
+      dist: trusty
+      before_script:
+        - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
+    - perl: "5.14"
+      dist: trusty
+      before_script:
+        - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
+    - perl: "5.12"
+      dist: trusty
+      before_script:
+        - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
+    - perl: "5.10"
+      dist: trusty
+      before_script:
+        - mysql -e 'create database mojolicious;'
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
 
 env:
-  matrix:
-    - TEST_ONLINE=mysql://root@/mojolicious
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
@@ -30,7 +59,6 @@ env:
 
 addons:
   mariadb: 10.4
-  postgresql: 9.6
 
 services:
   - postgresql
