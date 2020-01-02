@@ -11,19 +11,24 @@ matrix:
 #    - perl: "5.22"
     - perl: "5.20"
       dist: trusty
+      env:
+        - TEST_ONLINE=mysql://root@/mojolicious
+      script:
+        - mysql -e 'create database mojolicious;'
+
 addons:
   mariadb: 10.4
   postgresql: 9.6
 services:
   - postgresql
-before_script:
-  - mysql -e "SET Password=PASSWORD('travis')"
-  - mysql -e 'create database mojolicious;'
+#before_script:
+#  - mysql -e "SET Password=PASSWORD('travis')"
+#  - mysql -e 'create database mojolicious;'
 env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
-    - TEST_ONLINE=mysql://root:travis@localhost/mojolicious
+#    - TEST_ONLINE=mysql://root:travis@localhost/mojolicious
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
