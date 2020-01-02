@@ -2,7 +2,7 @@ dist: xenial
 language: perl
 sudo: required
 
-matrix:
+jobs:
   include:
 #    - perl: "5.30"
 #    - perl: "5.28"
@@ -28,7 +28,6 @@ env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
-#    - TEST_ONLINE=mysql://root:travis@localhost/mojolicious
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
