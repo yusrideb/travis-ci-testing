@@ -5,17 +5,18 @@ perl:
   - "5.30"
   - "5.28"
   env:
-    - TEST_ONLINE=mysql://root:travis@/mojolicious
-  before_script:
-    - sudo mysql -e "SET Password=PASSWORD('travis')"
-    - sudo mysql -e 'create database mojolicious;'
 
 env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
+    - TEST_ONLINE=mysql://root:travis@/mojolicious
   matrix:
     TEST_ONLINE=mysql://root@/mojolicious
+
+before_script:
+  - sudo mysql -e "SET Password=PASSWORD('travis')"
+  - sudo mysql -e 'create database mojolicious;'
 
 matrix:
   include:
