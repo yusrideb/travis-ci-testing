@@ -1,5 +1,7 @@
+dist: xenial
 language: perl
 sudo: required
+
 matrix:
   include:
     - perl: "5.30"
@@ -7,26 +9,14 @@ matrix:
 #    - perl: "5.26"
 #    - perl: "5.24"
 #    - perl: "5.22"
-    - perl: "5.20"
-      dist: trusty
-#    - perl: "5.18"
-#      dist: trusty
-#    - perl: "5.16"
-#      dist: trusty
-#    - perl: "5.14"
-#      dist: trusty
-#    - perl: "5.12"
-#      dist: trusty
-#    - perl: "5.10"
-#      dist: trusty
 addons:
   mariadb: 10.4
   postgresql: 9.6
 services:
   - postgresql
 before_script:
-  - sudo mysql -e "SET Password=PASSWORD('travis')"
-  - sudo mysql -e 'create database mojolicious;'
+  - mysql -e "SET Password=PASSWORD('travis')"
+  - mysql -e 'create database mojolicious;'
 env:
   global:
     - HARNESS_OPTIONS=j9
