@@ -21,6 +21,7 @@ before_script:
   - psql -U postgres -c 'create database msa_test'
   - sudo mysql -e "SET Password=PASSWORD('travis')"
   - sudo mysql -e 'create database msa_test;'
+  - sudo mysql -e "create table
 env:
   global:
     - HARNESS_OPTIONS=j9
@@ -30,6 +31,7 @@ env:
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
+  - cpanm -n Mojolicious
 script:
   - prove -lvr t
 notifications:
