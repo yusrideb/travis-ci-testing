@@ -10,44 +10,44 @@ perl:
 
 before_script:
   - sudo mysql -e "SET Password=PASSWORD('travis')"
-  - sudo mysql -e 'create database mojolicious;'
+  - sudo mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
 
 matrix:
   include:
     - perl: "5.20"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.18"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.16"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.14"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.12"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
     - perl: "5.10"
       dist: trusty
       before_script:
-        - mysql -e 'create database mojolicious;'
+        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
 
