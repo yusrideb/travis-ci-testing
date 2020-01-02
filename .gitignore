@@ -1,38 +1,22 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Perl template
-!Build/
-.last_cover_stats
-/META.yml
-/META.json
-/MYMETA.*
-*.o
-*.pm.tdy
-*.bs
-
-# Devel::Cover
-cover_db/
-
-# Devel::NYTProf
-nytprof.out
-
-# Dizt::Zilla
-/.build/
-
-# Module::Build
-_build/
-Build
-Build.bat
-
-# Module::Install
-inc/
-
-# ExtUtils::MakeMaker
-/blib/
-/_eumm/
-/*.gz
+.*
+*~
+_*
+!.gitattributes
+!.gitignore
+!.appveyor.cmd
+!.appveyor.yml
+!.perltidyrc
+!.travis.yml
+/blib
+/pm_to_blib
 /Makefile
 /Makefile.old
-/MANIFEST.bak
-/pm_to_blib
-/*.zip
-
+/MANIFEST*
+!MANIFEST.SKIP
+/META.*
+/MYMETA.*
+/local
+/test
+cpanfile.snapshot
+dist.ini
+*.tar.gz
