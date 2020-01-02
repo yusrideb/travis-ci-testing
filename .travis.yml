@@ -4,7 +4,6 @@ sudo: required
 perl:
   - "5.30"
   - "5.28"
-  env:
 
 env:
   global:
