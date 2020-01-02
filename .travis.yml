@@ -62,6 +62,7 @@ addons:
 
 services:
   - postgresql
+  - mariadb
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
