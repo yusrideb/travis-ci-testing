@@ -20,9 +20,7 @@ before_script:
 
 matrix:
   include:
-    - perl:
-        - "5.20"
-        - "5.18"
+    - perl: "5.20"
       dist: trusty
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
