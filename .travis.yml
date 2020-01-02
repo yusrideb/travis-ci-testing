@@ -4,16 +4,20 @@ sudo: required
 
 jobs:
   include:
-#    - perl: "5.30"
-#    - perl: "5.28"
+    - perl: "5.30"
+    - perl: "5.28"
+      before_script:
+        - sudo mysql -e "SET Password=PASSWORD('travis')"
+        - sudo mysql -e 'create database msa_test;'
 #    - perl: "5.26"
 #    - perl: "5.24"
 #    - perl: "5.22"
     - perl: "5.20"
+    - perl: "5.18"
       dist: trusty
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
-      script:
+      before_script:
         - mysql -e 'create database mojolicious;'
 
 addons:
