@@ -10,6 +10,7 @@ matrix:
 #    - perl: "5.24"
 #    - perl: "5.22"
     - perl: "5.20"
+      dist: trusty
 addons:
   mariadb: 10.4
   postgresql: 9.6
