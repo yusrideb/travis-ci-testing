@@ -30,7 +30,7 @@ env:
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
-  - cpanm -n Mojolicious
+  - cpanm -n --installdeps .
 script:
   - prove -lvr t
 notifications:
