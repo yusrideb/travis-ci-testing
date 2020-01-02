@@ -28,7 +28,9 @@ env:
     - TEST_ONLINE_mysql=mysql://root@/msa_test
     - TEST_ONLINE_pg=postgresql://postgres@/msa_test
 install:
-  - "cpanm -n Test::Pod Test::Pod::Coverage"
+  - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
+script:
+  - prove -lvr t
 notifications:
   email: false
