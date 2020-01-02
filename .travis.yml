@@ -24,7 +24,7 @@ env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
-    - TEST_ONLINE_mysql=mysql://root:travis@localhost/mojolicious
+    - TEST_ONLINE=mysql://root:travis@localhost/mojolicious
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
