@@ -10,23 +10,25 @@ sub startup {
 
   # Load configuration from hash returned by config file
   my $config = $self->plugin('Config');
-  my $mysql_cfg = $config->{mysql};
-  
+  my $mysql_cfg
+    = $ENV{TEST_ONLINE} ? $ENV{TEST_ONLINE} : $config->{mysql};
+
   # Set Default TimeZone
   $ENV{TZ} = $config->{timezone};
-  
+
   # Helper for SQL Abstract
-  $self->helper(sql => sub { state $sql_abstract = CellBIS::SQL::Abstract->new() });
-  
+  $self->helper(
+    sql => sub { state $sql_abstract = CellBIS::SQL::Abstract->new() });
+
   # Helper for MySQL
   $self->helper(
     mysql => sub {
       state $mysql = Mojo::mysql->new($mysql_cfg);
     }
   );
-  
+
   # Migrate to latest version if necessary
-  my $tbl_basic  = $self->home->rel_file('migrations/main.sql');
+  my $tbl_basic = $self->home->rel_file('migrations/main.sql');
   $self->mysql->migrations->name('main-db')->from_file($tbl_basic)->migrate;
 
   # Configure the application

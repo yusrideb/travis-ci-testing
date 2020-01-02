@@ -18,15 +18,13 @@ addons:
 services:
   - postgresql
 before_script:
-  - psql -U postgres -c 'create database msa_test'
   - sudo mysql -e "SET Password=PASSWORD('travis')"
-  - sudo mysql -e 'create database msa_test;'
+  - sudo mysql -e 'create database mojolicious;'
 env:
   global:
     - HARNESS_OPTIONS=j9
     - LC_ALL=C
-    - TEST_ONLINE_mysql=mysql://root@/msa_test
-    - TEST_ONLINE_pg=postgresql://postgres@/msa_test
+    - TEST_ONLINE_mysql=mysql://root:travis@/mojolicious
 install:
   - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
