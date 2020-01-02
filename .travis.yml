@@ -13,12 +13,12 @@ jobs:
 #    - perl: "5.24"
 #    - perl: "5.22"
     - perl: "5.20"
-    - perl: "5.18"
       dist: trusty
       env:
         - TEST_ONLINE=mysql://root@/mojolicious
       before_script:
         - mysql -e 'create database mojolicious;'
+    - perl: "5.18"
 
 addons:
   mariadb: 10.4
