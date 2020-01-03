@@ -10,8 +10,8 @@ perl:
 
 before_script:
   - psql -U postgres -c 'create database mojolicious'
-  - sudo mysql -e "SET Password=PASSWORD('travis')"
-  - sudo mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
+  - mysql -e "SET Password=PASSWORD('travis')"
+  - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
 
 matrix:
   include:
