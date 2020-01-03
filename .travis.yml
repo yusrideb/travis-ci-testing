@@ -18,12 +18,14 @@ matrix:
     - perl: "5.20"
       dist: trusty
       before_script:
+        - psql -U postgres -c 'create database mojolicious'
         - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE_mysql=mysql://root@/mojolicious
     - perl: "5.18"
       dist: trusty
       before_script:
+        - psql -U postgres -c 'create database mojolicious'
         - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE_mysql=mysql://root@/mojolicious
