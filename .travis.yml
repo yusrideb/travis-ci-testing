@@ -71,8 +71,10 @@ addons:
 services:
   - postgresql
 install:
+  - cpanm -n Test::Pod Test::Pod::Coverage
   - cpanm -n Devel::CheckLib DBI DBD::mysql Mojo::mysql Mojo::Pg
-  - cpanm -n Net::DNS::Native Role::Tiny Test::Pod Test::Pod::Coverage
   - cpanm -n --installdeps .
+script:
+  - prove -lvr t
 notifications:
   email: false
