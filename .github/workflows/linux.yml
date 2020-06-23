@@ -26,6 +26,7 @@ jobs:
       - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - uses: getong/mariadb-action@v1.1
+        run: mysql -uroot -ptest_mhf -e "CREATE DATABASE mojolicious;"
         with:
           host port: 53366
           container port: 3307
@@ -36,8 +37,6 @@ jobs:
           mysql root password: 'test_mhf' # Required if "mysql user" is empty, default is empty. The root superuser password
           mysql user: 'mhf_test' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: 'test_mhf' # Required if "mysql user" exists. The password for the "mysql user"
-      - name: Create Database MariaDB
-        run: mysql -uroot -ptest_mhf -e "CREATE DATABASE mojolicious;"
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
