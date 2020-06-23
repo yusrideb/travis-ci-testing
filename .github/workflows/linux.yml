@@ -27,8 +27,8 @@ jobs:
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - uses: getong/mariadb-action@v1.1
         with:
-          host port: 3800
-          container port: 3307
+          host port: 3306
+          container port: 3306
           character set server: 'utf8'
           collation server: 'utf8_general_ci'
           mariadb version: '10.4.10'
@@ -42,9 +42,10 @@ jobs:
           cpanm -n Test::Pod Test::Pod::Coverage
           cpanm -n Devel::CheckLib DBI DBD::MariaDB Mojo::mysql Mojo::Pg
           cpanm -n --installdeps .
+        env:
+          TEST_ONLINE_mariadb: mariadb://root:root@/mojolicious
       - name: Run tests
         run: prove -lvr t
         env:
           TEST_POD: 1
           TEST_EV: 1
-          TEST_ONLINE_mariadb: mariadb://root:root@/mojolicious
