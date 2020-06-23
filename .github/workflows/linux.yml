@@ -47,4 +47,4 @@ jobs:
         env:
           TEST_POD: 1
           TEST_EV: 1
-          TEST_ONLINE_mariadb: mariadb://root:test_mhf@127.0.0.1:53366/mhf_test
+          TEST_ONLINE_mariadb: mariadb://root@127.0.0.1:53366/mhf_test
