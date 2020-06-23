@@ -35,28 +35,6 @@ matrix:
         - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
       env:
         - TEST_ONLINE_mysql=mysql://root@/mojolicious
-    - perl: "5.14"
-      dist: trusty
-      before_script:
-        - psql -U postgres -c 'create database mojolicious'
-        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
-      env:
-        - TEST_ONLINE_mysql=mysql://root@/mojolicious
-    - perl: "5.12"
-      dist: trusty
-      before_script:
-        - psql -U postgres -c 'create database mojolicious'
-        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
-      env:
-        - TEST_ONLINE_mysql=mysql://root@/mojolicious
-    - perl: "5.10"
-      dist: trusty
-      before_script:
-        - psql -U postgres -c 'create database mojolicious'
-        - mysql -e 'create database mojolicious default character set utf8 default collate utf8_general_ci;'
-      env:
-        - TEST_ONLINE_mysql=mysql://root@/mojolicious
-
 env:
   global:
     - HARNESS_OPTIONS=j9
