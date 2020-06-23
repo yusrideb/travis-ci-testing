@@ -31,22 +31,19 @@ jobs:
           collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
           mariadb version: '10.4.10' # Optional, default value is "latest". The version of the MariaDB
           mysql database: 'mhf_test' # Optional, default value is "test". The specified database which will be create
-          mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
+          mysql root password: 'test_mhf' # Required if "mysql user" is empty, default is empty. The root superuser password
+          mysql user: 'mhf_test' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+          mysql password: 'test_mhf' # Required if "mysql user" exists. The password for the "mysql user"
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
           cpanm -n Test::Pod Test::Pod::Coverage
           cpanm -n Devel::CheckLib DBI DBD::MariaDB Mojo::mysql Mojo::Pg
           cpanm -n --installdeps .
-          psql -U postgres -c 'create database mhf_test'
-          sudo mysql -e "SET Password=PASSWORD('travis')"
-          sudo mysql -e 'create database mhf_test;'
       - name: Run tests
         run: prove -lvr t
         env:
           TEST_POD: 1
           TEST_EV: 1
-          TEST_ONLINE_mariadb: mariadb://root:travis@/mhf_test
-          TEST_ONLINE_pg: postgresql://postgres@/mhf_test
+          TEST_ONLINE_mariadb: mariadb://root:travis@127.0.0.1/mhf_test
+          TEST_ONLINE_pg: postgresql://postgres@127.0.0.1/mhf_test
