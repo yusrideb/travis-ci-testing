@@ -27,8 +27,15 @@ jobs:
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - uses: getong/mariadb-action@v1.1
         with:
-          mysql user: 'mojolicious' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: 'mojolicious' # Required if "mysql user" exists. The password for the "mysql user"
+          host port: 3800
+          container port: 3307
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mariadb version: '10.4.10'
+          mysql database: 'mojolicious'
+          mysql root password: ${{ secrets.RootPassword }}
+          mysql user: 'mojolicious'
+          mysql password: ${{ secrets.DatabasePassword }}
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
