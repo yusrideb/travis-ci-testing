@@ -26,7 +26,6 @@ jobs:
       - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - uses: getong/mariadb-action@v1.1
-        run: mysql -uroot -ptest_mhf -e "CREATE DATABASE mojolicious;"
         with:
           host port: 53366
           container port: 3307
