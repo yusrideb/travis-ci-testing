@@ -33,9 +33,9 @@ jobs:
           collation server: 'utf8_general_ci'
           mariadb version: '10.4.10'
           mysql database: 'mojolicious'
-          mysql root password: ${{ secrets.RootPassword }}
+          mysql root password: root
           mysql user: 'mojolicious'
-          mysql password: ${{ secrets.DatabasePassword }}
+          mysql password: root
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
@@ -47,4 +47,4 @@ jobs:
         env:
           TEST_POD: 1
           TEST_EV: 1
-          TEST_ONLINE_mariadb: mariadb://root@/mojolicious
+          TEST_ONLINE_mariadb: mariadb://root:root@/mojolicious
