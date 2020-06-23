@@ -27,11 +27,15 @@ jobs:
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - name: Install dependencies
         run: |
-          cpanm -n --installdeps .
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
           cpanm -n Test::Pod Test::Pod::Coverage
+          cpanm -n Devel::CheckLib DBI DBD::MariaDB Mojo::mysql Mojo::Pg
+          cpanm -n --installdeps .
+          psql -U postgres -c 'create database mhf_test'
+          sudo mysql -e "SET Password=PASSWORD('travis')"
+          sudo mysql -e 'create database mhf_test;'
       - name: Run tests
-        run: prove -l t t/mojo t/mojolicious
+        run: prove -lvr t
         env:
           TEST_POD: 1
           TEST_EV: 1
