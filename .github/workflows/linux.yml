@@ -34,8 +34,8 @@ jobs:
           mariadb version: '10.4.10' # Optional, default value is "latest". The version of the MariaDB
           mysql database: 'mhf_test' # Optional, default value is "test". The specified database which will be create
           mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql user: 'mhf_test' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: 'test_mhf' # Required if "mysql user" exists. The password for the "mysql user"
+          mysql user: 'mojolicious' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+          mysql password: 'mojolicious' # Required if "mysql user" exists. The password for the "mysql user"
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
