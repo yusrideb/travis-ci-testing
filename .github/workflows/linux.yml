@@ -36,6 +36,7 @@ jobs:
           mysql root password: 'test_mhf' # Required if "mysql user" is empty, default is empty. The root superuser password
           mysql user: 'mhf_test' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: 'test_mhf' # Required if "mysql user" exists. The password for the "mysql user"
+        run: mysql -uroot -ptest_mhf -e "CREATE DATABASE mojolicious;"
       - name: Install dependencies
         run: |
           cpanm -n Cpanel::JSON::XS EV Role::Tiny
