@@ -45,5 +45,5 @@ jobs:
         env:
           TEST_POD: 1
           TEST_EV: 1
-          TEST_ONLINE_mariadb: mariadb://root:travis@127.0.0.1/mhf_test
+          TEST_ONLINE_mariadb: mariadb://root:test_mhf@127.0.0.1/mhf_test
           TEST_ONLINE_pg: postgresql://postgres@127.0.0.1/mhf_test
