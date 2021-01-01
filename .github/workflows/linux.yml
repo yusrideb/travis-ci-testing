@@ -4,6 +4,10 @@ jobs:
   perl:
     runs-on: ubuntu-latest
     services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
       mysql:
         image: mysql:5.7
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -12,10 +16,6 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: mhf_tes
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
     strategy:
       matrix:
         perl-version:
