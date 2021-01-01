@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           cpanm -n --installdeps .
-          cpanm -n Test::Pod Test::Pod::Coverage
+          cpanm -n Test::Pod Test::Pod::Coverage DBI DBD::mariadb DBD::mysql Mojo::mysql Mojo::Pg
       - name: Run tests
         run: prove -l t/*.t
         env:
