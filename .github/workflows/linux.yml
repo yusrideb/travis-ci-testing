@@ -4,6 +4,15 @@ jobs:
   perl:
     runs-on: ubuntu-latest
     services:
+      services:
+        mysql:
+          image: mysql:5.7
+          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+          port:
+            - 3306
+          env:
+            MYSQL_ALLOW_EMPTY_PASSWORD: yes
+            MYSQL_DATABASE: mojo_test
       postgres:
         image: postgres
         env:
@@ -22,17 +31,6 @@ jobs:
         run: perl -V
       - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
-      - uses: getong/mariadb-action@v1.1
-        with:
-          host port: 3306
-          container port: 3306
-          character set server: 'utf8'
-          collation server: 'utf8_general_ci'
-          mariadb version: '10.4.10'
-          mysql database: 'mhf_test'
-          mysql root password: 'root'
-          mysql user: 'mojolicious'
-          mysql password: 'mojolicious'
       - name: Install dependencies
         run: |
           cpanm -n --installdeps . --with-all-features
@@ -43,7 +41,7 @@ jobs:
           HARNESS_OPTIONS: j3
           TEST_FOR: 500
 
-          TEST_ONLINE_mysql: mysql://root:root@127.0.0.1:3306/mhf_test
+          TEST_ONLINE_mysql: mysql://root@127.0.0.1:${{job.services.mysql.ports[3306]}}/mojo_test
           TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
           TEST_POD: 1
           TEST_PUBSUB: 1
