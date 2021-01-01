@@ -8,7 +8,7 @@ jobs:
         image: mariadb:10.3
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: mojo_test
+          MYSQL_DATABASE: mhf_test
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         ports:
           - 3306:3306
@@ -16,6 +16,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: mhf_test
     strategy:
       matrix:
         perl-version:
@@ -37,8 +38,8 @@ jobs:
         env:
           HARNESS_OPTIONS: j3
           TEST_FOR: 500
-          TEST_ONLINE_mysql: mysql://root:password@mysql:3306/mojo_test
-          TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
+          TEST_ONLINE_mysql: mysql://root:password@mysql:3306/mhf_test
+          TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/mhf_test
           TEST_POD: 1
           TEST_PUBSUB: 1
 
