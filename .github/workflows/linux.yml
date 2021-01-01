@@ -29,20 +29,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: perl -V
         run: perl -V
-      - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
-        run: cpanm -n App::cpanminus ExtUtils::MakeMaker
-      - name: Install dependencies
+      - name: Verify MySQL connection from container
         run: |
-          cpanm -n --installdeps . --with-all-features
-          cpanm -n Test::Pod Test::Pod::Coverage
-      - name: Run tests
-        run: prove -l t/*.t
-        env:
-          HARNESS_OPTIONS: j3
-          TEST_FOR: 500
-
-          TEST_ONLINE_mysql: mysql://root:password@127.0.0.1:53306/mojo_test
-          TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
-          TEST_POD: 1
-          TEST_PUBSUB: 1
-
+          apt-get update
+          apt-get install -y mysql-client
+          mysql --host mojo_test -uroot -ppassword -e "SHOW DATABASES"
