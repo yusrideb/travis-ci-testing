@@ -42,7 +42,8 @@ jobs:
         env:
           HARNESS_OPTIONS: j3
           TEST_FOR: 500
-          TEST_ONLINE_mysql: mysql://root@/mhf_test
+
+          TEST_ONLINE_mysql: mysql://root:root@127.0.0.1:3306/mhf_test
           TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
           TEST_POD: 1
           TEST_PUBSUB: 1
