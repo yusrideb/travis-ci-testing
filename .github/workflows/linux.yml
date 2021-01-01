@@ -1,4 +1,4 @@
-name: ci-ubuntu
+name: linux
 on: [push, pull_request]
 jobs:
   perl:
