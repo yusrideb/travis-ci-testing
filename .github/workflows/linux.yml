@@ -1,0 +1,52 @@
+name: linux
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+jobs:
+  perl:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        perl-version:
+          - '5.16'
+          - '5.18'
+          - '5.20'
+          - '5.22'
+          - '5.30'
+    container:
+      image: perl:${{ matrix.perl-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: perl -V
+        run: perl -V
+      - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
+        run: cpanm -n App::cpanminus ExtUtils::MakeMaker
+      - uses: getong/mariadb-action@v1.1
+        with:
+          host port: 3306
+          container port: 3306
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mariadb version: '10.4.10'
+          mysql database: 'mojolicious'
+          mysql root password: 'root'
+          mysql user: 'mojolicious'
+          mysql password: 'mojolicious'
+      - name: Install dependencies
+        run: |
+          cpanm -n Cpanel::JSON::XS EV Role::Tiny
+          cpanm -n Test::Pod Test::Pod::Coverage
+          cpanm -n Devel::CheckLib DBI DBD::MariaDB Mojo::mysql Mojo::Pg
+          cpanm -n --installdeps .
+        env:
+          TEST_ONLINE_mariadb: mariadb://root:root@/mhf_test
+          TEST_ONLINE_pg: postgresql://mhf_test:mhf_test@localhost:5432/mhf_test
+      - name: Run tests
+        run: prove -lvr t
+        env:
+          TEST_POD: 1
+          TEST_EV: 1
