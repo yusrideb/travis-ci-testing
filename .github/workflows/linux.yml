@@ -13,7 +13,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: mhf_tes
+          MYSQL_DATABASE: mhf_test
     strategy:
       matrix:
         perl-version:
@@ -38,6 +38,6 @@ jobs:
           HARNESS_OPTIONS: j3
           TEST_FOR: 500
           TEST_ONLINE_mysql: mysql://root@127.0.0.1:${{job.services.mysql.ports[3306]}}/mhf_test
-          TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/mhf_test
+          TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
           TEST_POD: 1
           TEST_PUBSUB: 1
