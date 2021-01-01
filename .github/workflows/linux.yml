@@ -7,7 +7,6 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: mojo_test
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -28,7 +27,7 @@ jobs:
       - name: Verify MySQL connection from container
         run: |
           apt-get update
-          apt-get install -y mysql-client
+          apt-get install -y default-libmysqlclient-dev
           mysql --host mojo_test -uroot -ppassword -e "SHOW DATABASES"
       - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
