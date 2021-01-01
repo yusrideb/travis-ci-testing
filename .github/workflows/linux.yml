@@ -11,6 +11,8 @@ jobs:
       mysql:
         image: mysql:5.7
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        port:
+          - 3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: mhf_test
@@ -41,3 +43,4 @@ jobs:
           TEST_ONLINE_pg: postgresql://postgres:postgres@postgres:5432/postgres
           TEST_POD: 1
           TEST_PUBSUB: 1
+
