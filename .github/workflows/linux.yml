@@ -28,7 +28,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y default-libmysqlclient-dev
-          mysql --host mojo_test -uroot -ppassword -e "SHOW DATABASES"
+          mysql -uroot -h127.0.0.1 -ppassword -e 'CREATE DATABASE IF NOT EXISTS db1;'
       - name: Fix ExtUtils::MakeMaker (for Perl 5.16 and 5.18)
         run: cpanm -n App::cpanminus ExtUtils::MakeMaker
       - name: Install dependencies
