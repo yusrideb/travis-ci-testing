@@ -1,4 +1,4 @@
-# travis-ci-testing [![Build Status](https://travis-ci.com/yusrideb/travis-ci-testing.svg?branch=master)](https://travis-ci.com/yusrideb/travis-ci-testing)
+# travis-ci-testing ![linux](https://github.com/yusrideb/perl-travis-ci-testing/workflows/linux/badge.svg)
 This repository only for try .travis.yml
 
 Mojolicious using MariaDB and PostgreSQL 
